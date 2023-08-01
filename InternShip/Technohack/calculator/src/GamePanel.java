@@ -1,13 +1,22 @@
 import javax.swing.*;
+
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.*;
 
 public class GamePanel extends JPanel implements ActionListener{
     
-    final int SCREEN_HEIGHT = 600;
+    final int SCREEN_HEIGHT = 550;
     final int SCREEN_WIDTH = 400;
+
+    String res="";
+    String resTemp="";
+    Font bigFont = new Font("Arial", Font.BOLD, 20);
+    Font textFieldFont = new Font("Arial", Font.BOLD, 65);
+
+    boolean addBool, subBool, mulBool, divBool;
 
     JTextField resTextField = new JTextField();
 
@@ -36,10 +45,10 @@ public class GamePanel extends JPanel implements ActionListener{
     GamePanel(){
         this.setLayout(null);
         this.setPreferredSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT));
-        this.addToPanel();
-        this.addLocation();
-    }
+        this.init();
 
+        resTextField.setHorizontalAlignment(JTextField.RIGHT);
+    }
 
     public void paint(Graphics g){
         super.paint(g);
@@ -47,9 +56,95 @@ public class GamePanel extends JPanel implements ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        // throw new UnsupportedOperationException("Unimplemented method 'actionPerformed'");
+        if(e.getSource() == btn_0){
+            System.out.println("0");
+            res += "0";
+            resTextField.setText(res);
+        }
+        else if(e.getSource() == btn_1){
+            System.out.println("1");
+            res += "1";
+            resTextField.setText(res);    
+        }
+        else if(e.getSource() == btn_2){
+            System.out.println("2");
+            res += "2";
+            resTextField.setText(res);
+        }
+        else if(e.getSource() == btn_3){
+            System.out.println("3");
+            res += "3";
+            resTextField.setText(res);
+        }
+        else if(e.getSource() == btn_4){
+            System.out.println("4");
+            res += "4";
+            resTextField.setText(res);
+        }
+        else if(e.getSource() == btn_5){
+            System.out.println("5");
+            res += "5";
+            resTextField.setText(res);
+        }
+        else if(e.getSource() == btn_6){
+            System.out.println("6");
+            res += "6";
+            resTextField.setText(res);
+        }
+        else if(e.getSource() == btn_7){
+            System.out.println("7");
+            res += "7";
+            resTextField.setText(res);
+        }
+        else if(e.getSource() == btn_8){
+            System.out.println("8");
+            res += "8";
+            resTextField.setText(res);
+        }
+        else if(e.getSource() == btn_9){
+            System.out.println("9");
+            res += "9";
+            resTextField.setText(res);
+        }
+        else if(e.getSource() == btnAdd){
+            System.out.println("add");
+            resTemp = res;
+            res = "";
+            resTextField.setText(res);
+            addBool = true;
+            subBool = divBool = mulBool = false;
+        }
+        else if(e.getSource() == btnSub){
+            System.out.println("sub");
+        }
+        else if(e.getSource() == btnMul){
+            System.out.println("Mul");
+        }
+        else if(e.getSource() == btnDiv){
+            System.out.println("div");
+        }
+        else if(e.getSource() == btnDot){
+            System.out.println("dot");
+        }
+        else if(e.getSource() == btnEqual){
+            System.out.println("equal");
+        }
+        else if(e.getSource() == btnDel){
+            System.out.println("del");
+        }
+        else if(e.getSource() == btnClr){
+            System.out.println("clr");
+        }   
     }
 
+    public void init(){
+        this.addToPanel();
+        this.addLocation();
+        this.addListener();
+        this.setColor();
+        this.setFontSize();
+        resTextField.setEditable(false);
+    }
 
     public void addToPanel(){
         this.add(resTextField);
@@ -94,4 +189,70 @@ public class GamePanel extends JPanel implements ActionListener{
         btn_0.setBounds(100,460,100,90);
         btnEqual.setBounds(200,460,200,90);
     }
+
+    public void addListener(){
+        btn_0.addActionListener(this);
+        btn_1.addActionListener(this);
+        btn_2.addActionListener(this);
+        btn_3.addActionListener(this);
+        btn_4.addActionListener(this);
+        btn_5.addActionListener(this);
+        btn_6.addActionListener(this);
+        btn_7.addActionListener(this);
+        btn_8.addActionListener(this);
+        btn_9.addActionListener(this);
+        btnDel.addActionListener(this);
+        btnClr.addActionListener(this);
+        btnAdd.addActionListener(this);
+        btnSub.addActionListener(this);
+        btnDiv.addActionListener(this);
+        btnMul.addActionListener(this);
+        btnDot.addActionListener(this);
+        btnEqual.addActionListener(this);
+    }
+
+    public void setColor(){
+        Color greyColor = new Color(236, 240, 241);
+        btnEqual.setBackground(greyColor);
+        btnClr.setBackground(new Color(255, 91, 91 ));
+        btn_0.setBackground(Color.white);
+        btn_1.setBackground(Color.white);
+        btn_2.setBackground(Color.white);
+        btn_3.setBackground(Color.white);
+        btn_4.setBackground(Color.white);
+        btn_5.setBackground(Color.white);
+        btn_6.setBackground(Color.white);
+        btn_7.setBackground(Color.white);
+        btn_8.setBackground(Color.white);
+        btn_9.setBackground(Color.white);
+        btnAdd.setBackground(greyColor);
+        btnSub.setBackground(greyColor);
+        btnDiv.setBackground(greyColor);
+        btnMul.setBackground(greyColor);
+        btnDel.setBackground(greyColor);
+        btnDot.setBackground(greyColor);
+    }
+
+    public void setFontSize(){
+        resTextField.setFont(textFieldFont);
+        btn_0.setFont(bigFont);
+        btn_1.setFont(bigFont);
+        btn_2.setFont(bigFont);
+        btn_3.setFont(bigFont);
+        btn_4.setFont(bigFont);
+        btn_5.setFont(bigFont);
+        btn_6.setFont(bigFont);
+        btn_7.setFont(bigFont);
+        btn_8.setFont(bigFont);
+        btn_9.setFont(bigFont);
+        btnDel.setFont(bigFont);
+        btnClr.setFont(bigFont);
+        btnAdd.setFont(bigFont);
+        btnSub.setFont(bigFont);
+        btnDiv.setFont(bigFont);
+        btnMul.setFont(bigFont);
+        btnDot.setFont(bigFont);
+        btnEqual.setFont(bigFont);
+    }
+
 }
