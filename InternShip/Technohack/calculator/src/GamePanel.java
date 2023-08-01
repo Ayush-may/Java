@@ -1,5 +1,4 @@
 import javax.swing.*;
-
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -17,6 +16,9 @@ public class GamePanel extends JPanel implements ActionListener{
     Font textFieldFont = new Font("Arial", Font.BOLD, 65);
 
     boolean addBool, subBool, mulBool, divBool;
+
+    Color greyColor = new Color(236, 240, 241);
+    Color selectColor = new Color(170, 183, 184 );
 
     JTextField resTextField = new JTextField();
 
@@ -113,27 +115,74 @@ public class GamePanel extends JPanel implements ActionListener{
             resTextField.setText(res);
             addBool = true;
             subBool = divBool = mulBool = false;
+            btnSelectColor();
+            btnAdd.setBackground(selectColor);
         }
         else if(e.getSource() == btnSub){
             System.out.println("sub");
+            resTemp = res;
+            res = "";
+            resTextField.setText(res);
+            subBool = true;
+            addBool = divBool = mulBool = false;
+            btnSelectColor();
+            btnSub.setBackground(selectColor);
         }
         else if(e.getSource() == btnMul){
             System.out.println("Mul");
+            resTemp = res;
+            res = "";
+            resTextField.setText(res);
+            mulBool = true;
+            subBool = divBool = addBool = false;
+            btnSelectColor();
+            btnMul.setBackground(selectColor);
         }
         else if(e.getSource() == btnDiv){
             System.out.println("div");
+            resTemp = res;
+            res = "";
+            resTextField.setText(res);
+            divBool = true;
+            subBool = addBool = mulBool = false;
+            btnSelectColor();
+            btnDiv.setBackground(selectColor);
         }
         else if(e.getSource() == btnDot){
             System.out.println("dot");
+            res +=".";
+            resTextField.setText(res);
+            
         }
         else if(e.getSource() == btnEqual){
             System.out.println("equal");
+            if(addBool){
+                resTextField.setText((Float.parseFloat(resTemp) + Float.parseFloat(res)) + "");
+            }
+            else if(subBool){
+                resTextField.setText((Float.parseFloat(resTemp) - Float.parseFloat(res)) + "");
+            }
+            else if(divBool){
+                resTextField.setText((Float.parseFloat(resTemp) / Float.parseFloat(res)) + "");
+            }
+            else if(mulBool){
+                resTextField.setText((Float.parseFloat(resTemp) * Float.parseFloat(res)) + "");
+            }
+            btnSelectColor();
         }
         else if(e.getSource() == btnDel){
             System.out.println("del");
         }
+        //     if((int))
+        //     int temp = Integer.parseInt(res);
+        //     temp /=10;
+        //     res = temp + "";
+        //     resTextField.setText(res);
+        // }
         else if(e.getSource() == btnClr){
             System.out.println("clr");
+            res = resTemp = "";
+            resTextField.setText(res);
         }   
     }
 
@@ -212,7 +261,7 @@ public class GamePanel extends JPanel implements ActionListener{
     }
 
     public void setColor(){
-        Color greyColor = new Color(236, 240, 241);
+        resTextField.setBackground(Color.WHITE);
         btnEqual.setBackground(greyColor);
         btnClr.setBackground(new Color(255, 91, 91 ));
         btn_0.setBackground(Color.white);
@@ -253,6 +302,13 @@ public class GamePanel extends JPanel implements ActionListener{
         btnMul.setFont(bigFont);
         btnDot.setFont(bigFont);
         btnEqual.setFont(bigFont);
+    }
+
+    public void btnSelectColor(){
+        btnAdd.setBackground(greyColor);
+        btnSub.setBackground(greyColor);
+        btnDiv.setBackground(greyColor);
+        btnMul.setBackground(greyColor);
     }
 
 }
