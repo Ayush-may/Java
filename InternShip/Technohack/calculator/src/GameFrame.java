@@ -5,9 +5,10 @@ public class GameFrame extends JFrame {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.add(new GamePanel());
 		this.setResizable(false);
-		this.setSize(400,600);
+		this.pack();
+		// this.setSize(400,600);
 		this.setLocation(200,50);
-		// this.setTitle("Calculator");
+		this.setTitle("Calculator");
 		this.setVisible(true);
     }
 }
