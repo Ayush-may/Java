@@ -7,7 +7,7 @@ public class GameFrame extends JFrame {
 		this.setResizable(false);
 		this.setSize(400,600);
 		this.setLocation(200,50);
-		this.setTitle("Calculator");
+		// this.setTitle("Calculator");
 		this.setVisible(true);
     }
 }
