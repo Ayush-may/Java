@@ -10,12 +10,14 @@ public class GamePanel extends JPanel implements ActionListener{
     final int SCREEN_HEIGHT = 550;
     final int SCREEN_WIDTH = 400;
 
+    
     String res="";
     String resTemp="";
     Font bigFont = new Font("Arial", Font.BOLD, 20);
     Font textFieldFont = new Font("Arial", Font.BOLD, 65);
 
     boolean addBool, subBool, mulBool, divBool;
+    boolean dotBool = true;
 
     Color greyColor = new Color(236, 240, 241);
     Color selectColor = new Color(170, 183, 184 );
@@ -111,79 +113,120 @@ public class GamePanel extends JPanel implements ActionListener{
         else if(e.getSource() == btnAdd){
             System.out.println("add");
             resTemp = res;
-            res = "";
-            resTextField.setText(res);
             addBool = true;
             subBool = divBool = mulBool = false;
             btnSelectColor();
-            btnAdd.setBackground(selectColor);
+            if(res != ""){
+                btnAdd.setBackground(selectColor);
+            }
+            res = "";
+            resTextField.setText(res);
+            dotBool = true;
+            
         }
         else if(e.getSource() == btnSub){
             System.out.println("sub");
             resTemp = res;
-            res = "";
-            resTextField.setText(res);
             subBool = true;
             addBool = divBool = mulBool = false;
             btnSelectColor();
-            btnSub.setBackground(selectColor);
+            if(res != ""){
+                btnSub.setBackground(selectColor);
+            }
+            res = "";
+            resTextField.setText(res);
+            dotBool = true;
         }
         else if(e.getSource() == btnMul){
             System.out.println("Mul");
             resTemp = res;
-            res = "";
-            resTextField.setText(res);
             mulBool = true;
             subBool = divBool = addBool = false;
             btnSelectColor();
-            btnMul.setBackground(selectColor);
+            if(res != ""){
+                btnMul.setBackground(selectColor);
+            }
+            res = "";
+            resTextField.setText(res);
+            dotBool = true;
         }
         else if(e.getSource() == btnDiv){
             System.out.println("div");
             resTemp = res;
-            res = "";
-            resTextField.setText(res);
             divBool = true;
             subBool = addBool = mulBool = false;
             btnSelectColor();
-            btnDiv.setBackground(selectColor);
+            if(res != ""){
+                btnDiv.setBackground(selectColor);
+            }
+            res = "";
+            resTextField.setText(res);
+            dotBool = true;
         }
         else if(e.getSource() == btnDot){
             System.out.println("dot");
-            res +=".";
-            resTextField.setText(res);
+            if(res != ""){
+                try { 
+                    if(dotBool){
+                        Integer.parseInt(res);  //used to check res is int or float
+                        res = res + ".";
+                        resTextField.setText(res);                    
+                    }
+                    dotBool = false;
+                }  
+                catch (NumberFormatException ee) { 
+                    dotBool = false;
+                } 
+            }
             
         }
         else if(e.getSource() == btnEqual){
             System.out.println("equal");
             if(addBool){
-                resTextField.setText((Float.parseFloat(resTemp) + Float.parseFloat(res)) + "");
+                res = (Float.parseFloat(resTemp) + Float.parseFloat(res)) + "" ;
+                resTextField.setText(res);
             }
             else if(subBool){
-                resTextField.setText((Float.parseFloat(resTemp) - Float.parseFloat(res)) + "");
+                res = (Float.parseFloat(resTemp) - Float.parseFloat(res)) + "" ;
+                resTextField.setText(res);
             }
             else if(divBool){
-                resTextField.setText((Float.parseFloat(resTemp) / Float.parseFloat(res)) + "");
+                res = (Float.parseFloat(resTemp) / Float.parseFloat(res)) + "" ;
+                resTextField.setText(res);
             }
             else if(mulBool){
-                resTextField.setText((Float.parseFloat(resTemp) * Float.parseFloat(res)) + "");
+                res = (Float.parseFloat(resTemp) * Float.parseFloat(res)) + "" ;
+                resTextField.setText(res);
             }
             btnSelectColor();
         }
         else if(e.getSource() == btnDel){
             System.out.println("del");
+            if(res != ""){
+                try {
+                    int temp = Integer.parseInt(res);
+                    temp /=10;
+                    res = temp + "";
+                    resTextField.setText(res);
+                } catch (Exception ee) {
+                    // removeLastDigitFloat();
+                }
+            }
         }
-        //     if((int))
-        //     int temp = Integer.parseInt(res);
-        //     temp /=10;
-        //     res = temp + "";
-        //     resTextField.setText(res);
-        // }
+
         else if(e.getSource() == btnClr){
             System.out.println("clr");
             res = resTemp = "";
             resTextField.setText(res);
+            btnSelectColor();
+            dotBool = true;
         }   
+    }
+
+    public void removeLastDigitFloat(){
+        int temp = (int)Float.parseFloat(res);
+        float temp2 = Float.parseFloat(res) - temp;
+        System.out.println(temp2);
     }
 
     public void init(){
@@ -310,5 +353,4 @@ public class GamePanel extends JPanel implements ActionListener{
         btnDiv.setBackground(greyColor);
         btnMul.setBackground(greyColor);
     }
-
 }
