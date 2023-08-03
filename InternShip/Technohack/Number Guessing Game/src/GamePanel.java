@@ -20,9 +20,9 @@ public class GamePanel extends JPanel implements KeyListener, ActionListener{
     int inputNum;
 
     JLabel gameName = new JLabel("Number Guessing Game");
-    JLabel outPutTxt = new JLabel("Sample Text");
     JLabel limitTxt = new JLabel("Limit: " + limit);
-    JTextField numberArea = new JTextField("100",5);
+    JTextField numberArea = new JTextField("",5);
+    JTextField outPutTxt = new JTextField("",23);
     JButton newGameBtn = new JButton("New Number");
     JButton guessBtn = new JButton("Guess");
 
@@ -34,6 +34,8 @@ public class GamePanel extends JPanel implements KeyListener, ActionListener{
         this.setLayout(layOut);
         this.setPreferredSize(new Dimension(SCREEN_WIDTH,SCREEN_HEIGHT));
         
+        this.setBackground(Color.WHITE);
+
         this.add(gameName);
         this.add(outPutTxt);
         this.add(numberArea);
@@ -42,29 +44,36 @@ public class GamePanel extends JPanel implements KeyListener, ActionListener{
         this.add(limitTxt);
 
         gameName.setFont(new Font("Arial", Font.BOLD, 30));
-
-        // gameName.setBounds(30, 10, 400, 30);
-        // numberArea.setBounds(180, 50, 50, 30);
-        // limitTxt.setBounds(183, 80, 50, 30);
-        // guessBtn.setBounds(90, 110, 110, 30);
-        // newGameBtn.setBounds(210, 110, 110, 30);
-        // outPutTxt.setBounds(150,150,250,30);
+        outPutTxt.setFont(new Font("Arial", Font.BOLD, 20));
 
         guessBtn.addActionListener(this);
         newGameBtn.addActionListener(this);
         numberArea.addKeyListener(this);
 
+        // guessBtn.setBackground(new Color(253, 242, 233  ));
+        // newGameBtn.setBackground(new Color(253, 242, 233  ));
+        // outPutTxt.setBackground(new Color(253, 242, 233  ));
 
+        outPutTxt.setEditable(false);
+
+        //Number Guessing Game
         layOut.putConstraint(SpringLayout.NORTH, gameName, 10, SpringLayout.NORTH, this);
         layOut.putConstraint(SpringLayout.WEST, gameName, 25, SpringLayout.WEST, this);
+        //Input textField
         layOut.putConstraint(SpringLayout.NORTH, numberArea, 10, SpringLayout.SOUTH, gameName);
         layOut.putConstraint(SpringLayout.WEST, numberArea, 170, SpringLayout.WEST, this);
+        //Limit txt
+        layOut.putConstraint(SpringLayout.NORTH, limitTxt, 10, SpringLayout.SOUTH, gameName);
+        layOut.putConstraint(SpringLayout.WEST, limitTxt, 20, SpringLayout.EAST, numberArea);
+        //Guess Number Button
         layOut.putConstraint(SpringLayout.NORTH, guessBtn,10 , SpringLayout.SOUTH, numberArea);
-        layOut.putConstraint(SpringLayout.WEST, guessBtn,110 , SpringLayout.WEST, this);
-        layOut.putConstraint(SpringLayout.NORTH,newGameBtn,10 , SpringLayout.SOUTH, numberArea);
-        layOut.putConstraint(SpringLayout.WEST,newGameBtn,20 , SpringLayout.EAST, guessBtn);
-
-        // layOut.putConstraint(SpringLayout.NORTH, guessBtn, 20, SpringLayout.NORTH, this);
+        layOut.putConstraint(SpringLayout.WEST, guessBtn,165 , SpringLayout.WEST, this);
+        //New Number Button
+        layOut.putConstraint(SpringLayout.NORTH,newGameBtn,10 , SpringLayout.SOUTH, guessBtn);
+        layOut.putConstraint(SpringLayout.WEST,newGameBtn,146 , SpringLayout.WEST, this);
+        //Output Area
+        layOut.putConstraint(SpringLayout.WEST,outPutTxt,5 , SpringLayout.WEST, this);
+        layOut.putConstraint(SpringLayout.SOUTH,outPutTxt,-10 , SpringLayout.SOUTH, this);
     }
 
     public void paint(Graphics g){
@@ -72,39 +81,57 @@ public class GamePanel extends JPanel implements KeyListener, ActionListener{
     }
 
     public void checkNum() {
-        if( inputNum == guessNum ){
-            System.out.println("Win!!!");
-            outPutTxt.setText("WIN!!!!");
-        }
-        else if(inputNum > guessNum){
-            System.out.println("input is higher than guesss number");
-            outPutTxt.setText("input is higher than guesss number");
+
+        limit--;
+
+        if(limit != 0){
+            if( inputNum == guessNum ){
+                System.out.println("Win!!!");
+                outPutTxt.setText("WIN!!!!");
+                limitTxt.setText("Limit: " + limit);
+            }   
+            else if(inputNum > guessNum){
+                System.out.println("input is higher than guesss number");
+                outPutTxt.setText("input is higher than guesss number");
+                limitTxt.setText("Limit: " + limit);
+             }
+            else{
+                System.out.println("input is lower than guess Number");
+                outPutTxt.setText("input is lower than guess Number");
+                limitTxt.setText("Limit: " + limit);
+            }
         }
         else{
-            System.out.println("input is lower than guess Number");
-            outPutTxt.setText("input is lower than guess Number");
+            outPutTxt.setText("U Loss and the number was "+ guessNum);
+            limitTxt.setText("Limit: " + limit);
+            limit = 5;
         }
+
     }
 
     @Override
     public void keyPressed(KeyEvent arg0) {
+        
         if(arg0.getKeyChar() == '\n'){
-            // System.out.println("Enter");
-            // numberArea.setText("");
-            // checkNum();
+            System.out.println("Enter");
+            try {
+                inputNum = Integer.parseInt(numberArea.getText());
+                numberArea.setText("");
+                System.out.println(inputNum);
+                checkNum();
+            } catch (Exception e) {}
         }
-        // System.out.println(arg0.getKeyCode());
+        //Escape Number
+        if(arg0.getKeyCode() == 27){ 
+            guessNum = random.nextInt(100);
+            System.out.println(guessNum);            
+        }
     }
 
     @Override
-    public void keyReleased(KeyEvent arg0) {
-
-    }
-
+    public void keyReleased(KeyEvent arg0) {}
     @Override
-    public void keyTyped(KeyEvent arg0) {
-
-    }
+    public void keyTyped(KeyEvent arg0) {}
 
     @Override
     public void actionPerformed(ActionEvent arg0) {
@@ -119,8 +146,18 @@ public class GamePanel extends JPanel implements KeyListener, ActionListener{
         else if(arg0.getSource() == newGameBtn){
             guessNum = random.nextInt(100);
             System.out.println(guessNum);
+            if(limit == 0){
+                limit = 5;
+                limitTxt.setText("Limit: " + limit);
+            }
         }
     }
-
-
 }
+
+
+        // gameName.setBounds(30, 10, 400, 30);
+        // numberArea.setBounds(180, 50, 50, 30);
+        // limitTxt.setBounds(183, 80, 50, 30);
+        // guessBtn.setBounds(90, 110, 110, 30);
+        // newGameBtn.setBounds(210, 110, 110, 30);
+        // outPutTxt.setBounds(150,150,250,30);
