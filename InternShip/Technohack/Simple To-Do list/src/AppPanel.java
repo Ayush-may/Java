@@ -4,12 +4,14 @@ import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import java.awt.Font;
 import javax.swing.*;
 
 
-public class AppPanel extends JPanel implements ActionListener {
+public class AppPanel extends JPanel implements ActionListener , KeyListener{
 
     final int width = 300;
     final int height = 500;
@@ -18,6 +20,7 @@ public class AppPanel extends JPanel implements ActionListener {
     JPanel panel = new JPanel();
     JButton add_task = new JButton("Add");
     JButton delete_task = new JButton("Delete");
+    JLabel name = new JLabel("To-Do List");
     JTextField text_field = new JTextField("",20);
 
     SpringLayout spring = new SpringLayout();
@@ -27,14 +30,19 @@ public class AppPanel extends JPanel implements ActionListener {
 
     AppPanel() {
         this.setLayout(new FlowLayout());
-        panel.setPreferredSize(new Dimension(width, height - 80));
+        panel.setPreferredSize(new Dimension(width, height - 110));
         this.setPreferredSize(new Dimension(width, height));
+        name.setFont(new Font("Arial", Font.BOLD, 20));
+        this.add(name);
         this.add(panel);
         this.add(text_field);
         this.add(add_task);
         this.add(delete_task); 
         add_task.addActionListener(this);
         delete_task.addActionListener(this);
+
+        this.setFocusable(true);
+        text_field.addKeyListener(this);
 
         text_field.setFont(font1);        
         timer = new Timer(delay, new ActionListener(){
@@ -43,7 +51,6 @@ public class AppPanel extends JPanel implements ActionListener {
                 panel.removeAll();
                 for(Task a:task_array){
                     panel.add(a);
-                    System.out.println("sd");
                 }
                 panel.revalidate();
                 panel.repaint();
@@ -60,14 +67,14 @@ public class AppPanel extends JPanel implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(e.getSource() == add_task){
+        if(e.getSource() == add_task ){
             task_array.add(new Task(text_field.getText()));
             panel.revalidate();
-            System.out.println(text_field.getText());
+            text_field.setText("");
         }
         if(e.getSource() == delete_task){
             ArrayList<Task> task_temp_array = new ArrayList<Task>();
-
+            text_field.setText("");
             for(Task a:task_array){
                 if(!a.get_check()){
                     task_temp_array.add(a);
@@ -77,6 +84,25 @@ public class AppPanel extends JPanel implements ActionListener {
             panel.revalidate();
             panel.repaint();
         }
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+        if(e.getKeyCode() ==  10){
+            task_array.add(new Task(text_field.getText()));
+            panel.revalidate();
+            text_field.setText("");
+        }
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+
     }
 
 }
