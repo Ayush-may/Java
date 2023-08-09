@@ -7,7 +7,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.Random;
-
 import javax.swing.*;
 
 public class GamePanel extends JPanel implements KeyListener, ActionListener{
@@ -50,10 +49,6 @@ public class GamePanel extends JPanel implements KeyListener, ActionListener{
         guessBtn.addActionListener(this);
         newGameBtn.addActionListener(this);
         numberArea.addKeyListener(this);
-
-        // guessBtn.setBackground(new Color(253, 242, 233  ));
-        // newGameBtn.setBackground(new Color(253, 242, 233  ));
-        // outPutTxt.setBackground(new Color(253, 242, 233  ));
 
         outPutTxt.setEditable(false);
 
@@ -157,11 +152,3 @@ public class GamePanel extends JPanel implements KeyListener, ActionListener{
         }
     }
 }
-
-
-        // gameName.setBounds(30, 10, 400, 30);
-        // numberArea.setBounds(180, 50, 50, 30);
-        // limitTxt.setBounds(183, 80, 50, 30);
-        // guessBtn.setBounds(90, 110, 110, 30);
-        // newGameBtn.setBounds(210, 110, 110, 30);
-        // outPutTxt.setBounds(150,150,250,30);
