@@ -15,7 +15,8 @@ public class GamePanel extends JPanel implements KeyListener, ActionListener{
     final int SCREEN_WIDTH = 400;
     final int SCREEN_HEIGHT = 200;
 
-    int limit = 5;
+    int limitvalue = 10;
+    int limit = limitvalue;
     int guessNum;
     int inputNum;
 
@@ -87,7 +88,7 @@ public class GamePanel extends JPanel implements KeyListener, ActionListener{
         if(limit != 0){
             if( inputNum == guessNum ){
                 System.out.println("Win!!!");
-                outPutTxt.setText("WIN!!!!");
+                outPutTxt.setText("WIN!!!! number :" + guessNum);
                 limitTxt.setText("Limit: " + limit);
             }   
             else if(inputNum > guessNum){
@@ -104,7 +105,7 @@ public class GamePanel extends JPanel implements KeyListener, ActionListener{
         else{
             outPutTxt.setText("U Loss and the number was "+ guessNum);
             limitTxt.setText("Limit: " + limit);
-            limit = 5;
+            limit = limitvalue;
         }
 
     }
@@ -145,9 +146,12 @@ public class GamePanel extends JPanel implements KeyListener, ActionListener{
         }
         else if(arg0.getSource() == newGameBtn){
             guessNum = random.nextInt(100);
+            limit = limitvalue;
+            limitTxt.setText("Limit: " + limit);
+            outPutTxt.setText("");
             System.out.println(guessNum);
             if(limit == 0){
-                limit = 5;
+                limit = limitvalue;
                 limitTxt.setText("Limit: " + limit);
             }
         }
