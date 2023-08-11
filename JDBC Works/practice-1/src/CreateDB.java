@@ -19,7 +19,10 @@ public class CreateDB {
     
 
     public static void main(String[] args) throws Exception {
-        Connection con = CreateDB.createConnection();
-        
+        String url = "jdbc:mysql://localhost:3306/";
+        String root = "root";
+        String password = "Admin123";
+        Connection con = DriverManager.getConnection(url, root, password);
+        System.out.println("Connected");
     }
 }
