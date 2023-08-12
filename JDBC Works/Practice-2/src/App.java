@@ -55,17 +55,17 @@ public class App {
         }
     }
 
-    public void read_data(){
+    public void read_data() {
         try {
-            Connection con = DriverManager.getConnection(url+db, username, password);
+            Connection con = DriverManager.getConnection(url + db, username, password);
             String query = "Select * from employee";
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery(query);
 
-            while(rs.next()){
-                System.out.println("ID : "+ rs.getInt(1));
-                System.out.println("Name : "+ rs.getString(2));
-                System.out.println("Hourly payment : "+ rs.getInt(3));
+            while (rs.next()) {
+                System.out.println("ID : " + rs.getInt(1));
+                System.out.println("Name : " + rs.getString(2));
+                System.out.println("Hourly payment : " + rs.getInt(3));
             }
 
             con.close();
@@ -73,11 +73,49 @@ public class App {
             // TODO: handle exception
         }
     }
-    
+
+    public void update_data() {
+        try {
+            Connection con = DriverManager.getConnection(url + db, username, password);
+            String query = "update employee set employee_id = ? where employee_name = ?" ;
+
+            PreparedStatement ps = con.prepareStatement(query);
+            
+            // System.out.print("Enter ID : ");
+            ps.setInt(1, 1);
+            // System.out.print("Enter Name : ");
+            ps.setString(2, "Akansha");
+
+            ps.executeUpdate();
+
+            // if (!ps.execute()) {
+            //     System.out.println("Updated Succesfull !!");
+            // } else {
+            //     System.out.println("failed");
+            // }
+            con.close();
+        } catch (Exception e) {
+            System.out.println("Something went wrong while inserting !");
+        }
+    }
+
+    public void delete_data(){
+        try {
+            Connection con = DriverManager.getConnection(url+db, username, password);
+            String query = "Delete from Employee where employee_id = 5";
+            Statement st = con.createStatement();
+            st.execute(query);
+        } catch (Exception e) {
+            System.out.println("something went wrong!!");
+        }
+    }
+
     public static void main(String[] args) {
         App data = new App();
 
         // data.insert_data();
         data.read_data();
+        // data.update_data();
+        // data.delete_data();
     }
 }
