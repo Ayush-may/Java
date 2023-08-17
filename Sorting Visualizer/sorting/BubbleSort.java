@@ -56,6 +56,15 @@ public class BubbleSort extends Thread {
 		    
 	}
 	
+	
+	public void changeToWhite() {
+		
+		for(int i=0;i<color.length;i++) {
+			System.out.println("Change to white");
+			color[i] = 0;
+		}
+	}
+	
 	public void sleep() { try{ Thread.sleep(delay);}catch(Exception e) {} }
 	
 	public void setDelay( int delay ) { this.delay = delay; }	

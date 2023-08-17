@@ -177,8 +177,10 @@ public class GamePanel extends JPanel implements ActionListener , ChangeListener
 	public void interruptThreads() {
 		if(running) {
 			if(bSort) {
+				bs.changeToWhite();
 				bs.setBreak(true);
-				bs.interrupt();
+//				bs.interrupt();
+			
 				System.out.println("BS interrupt");
 			}
 			else if(iSort) {
@@ -344,5 +346,6 @@ public class GamePanel extends JPanel implements ActionListener , ChangeListener
 		for(int i=0;i<HEIGHT;i++) {
 			check[i] = -1;
 		}
-	}	
+	}
+	
 }
