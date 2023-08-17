@@ -31,9 +31,9 @@ public class GamePanel extends JPanel implements ActionListener , ChangeListener
 						"Insertion Sort", 
 						"Selection Sort", 
 						"Merge Sort", 
-						"Quick Sort",
-						"Slow Sort",
-						"Radix Sort"
+						"Quick Sort"
+//						,"Slow Sort",	//Im removing these two sorting from program
+//						"Radix Sort"
 						};
 	
 	Random random = new Random();
@@ -172,6 +172,7 @@ public class GamePanel extends JPanel implements ActionListener , ChangeListener
 				}
 			}
 		}
+		repaint();
 	}
 	
 	public void interruptThreads() {
@@ -179,19 +180,19 @@ public class GamePanel extends JPanel implements ActionListener , ChangeListener
 			if(bSort) {
 				bs.changeToWhite();
 				bs.setBreak(true);
-//				bs.interrupt();
-			
-				System.out.println("BS interrupt");
+				bs.interrupt();
+
+//				System.out.println("BS interrupt");
 			}
 			else if(iSort) {
 				is.setBreak(true);
 				is.interrupt();
-				System.out.println("IS interrupt");
+//				System.out.println("IS interrupt");
 			}
 			else if(sSort) {
 				ss.setBreak(true);
 				ss.interrupt();
-				System.out.println("SS interrupt");
+//				System.out.println("SS interrupt");
 			}
 			else if(mSort) {
 				ms.setBreak(true);
@@ -237,7 +238,7 @@ public class GamePanel extends JPanel implements ActionListener , ChangeListener
 				bs = new BubbleSort(node,color,block,check1,delay);
 				bs.start();
 				check1 = bs.returnCheck();
-				System.out.println(check1 + " sdsdsd");
+//				System.out.println(check1 + " sdsdsd");
 			}
 			else if(iSort) {
 				is = new InsertionSort(node,color,block,check1,delay);
@@ -268,9 +269,10 @@ public class GamePanel extends JPanel implements ActionListener , ChangeListener
 	
 	public void checkCollision() {
 		if(check1 == 1) {
-			running = false;
-			System.out.println(check1);
-			System.out.println("Timer Stopped");
+//			running = false;
+			check1 = 0;
+//			System.out.println(check1);
+//			System.out.println("Timer Stopped");
 			JOptionPane.showMessageDialog(new JFrame(),"Sorted <3");
 			rePaintTimer.stop();
 		}		

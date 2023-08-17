@@ -24,7 +24,7 @@ public class InsertionSort extends Thread {
 	    for (i = 1; i < block; i++) {
 	        key = node[i].y;
 	        j = i - 1;
-	        color[i] = 2;
+//	        color[i] = 2;
 //	        color[j] = 1;
 	        if(loopBreak) {break;}
 	        while (j >= 0 && node[j].y < key) {
@@ -39,7 +39,7 @@ public class InsertionSort extends Thread {
 //	        color[j+1] = 1;
 	        node[j+1].y = key;
 //	        color[j+1] = 0;
-	        color[i] = 0;
+//	        color[i] = 0;
 	    }
 	    check = 1;
 	    this.interrupt();
