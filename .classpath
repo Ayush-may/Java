@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry excluding="JDBC Works/Jtable/src/|InternShip/Technohack/Number Guessing Game/src/|try/maze copy paste/|BoxCollision/src/|Sorting Visualizer/sorting/|HarmanPingPong/src/|VisualizerApplication/src/|Ray Casting/src/|College Work/src/|Flppy Bird/src/|Pong Game/src/|Click the dot/src/|Key/src/|Sorting Visualizer/src/|JDBC Works/Practice-2/src/|InternShip/Technohack/calculator/src/|InternShip/Technohack/Simple To-Do list/src/|JDBC Works/practice-1/src/" kind="src" path=""/>
+	<classpathentry kind="src" path="BoxCollision/src"/>
+	<classpathentry kind="src" path="Click the dot/src"/>
+	<classpathentry kind="src" path="College Work/src"/>
+	<classpathentry kind="src" path="Flppy Bird/src"/>
+	<classpathentry kind="src" path="HarmanPingPong/src"/>
+	<classpathentry kind="src" path="InternShip/Technohack/calculator/src"/>
+	<classpathentry kind="src" path="InternShip/Technohack/Number Guessing Game/src"/>
+	<classpathentry kind="src" path="InternShip/Technohack/Simple To-Do list/src"/>
+	<classpathentry kind="src" path="JDBC Works/Jtable/src"/>
+	<classpathentry kind="src" path="JDBC Works/practice-1/src"/>
+	<classpathentry kind="src" path="JDBC Works/Practice-2/src"/>
+	<classpathentry kind="src" path="Key/src"/>
+	<classpathentry kind="src" path="Pong Game/src"/>
+	<classpathentry kind="src" path="Ray Casting/src"/>
+	<classpathentry kind="src" path="Sorting Visualizer/sorting"/>
+	<classpathentry kind="src" path="Sorting Visualizer/src"/>
+	<classpathentry kind="src" path="try/maze copy paste"/>
+	<classpathentry kind="src" path="VisualizerApplication/src"/>
+	<classpathentry kind="output" path="BoxCollision/bin"/>
+</classpath>

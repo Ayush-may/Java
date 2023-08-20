@@ -1,8 +1,9 @@
 {
     "java.project.sourcePaths": [
         "JDBC Works/practice-1/src",
+        "JDBC Works/Practice-2/src",
         "InternShip/Technohack/Simple To-Do list/src",
-        "JDBC Works/Practice-2/src"
+        "College Work/src"
     ],
     "java.project.referencedLibraries": [
         "lib/**/*.jar",
